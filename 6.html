@@ -1,0 +1,62 @@
+<html>
+
+<body id="body" onmousemove="kol();">
+
+	<span id="smile" style="position:absolute;"><img  src="img/spin.png"></span>
+
+	<script type="text/javascript">
+		var rho = 60,
+			p = 0,
+			k = Math.PI / 180 * 1.5;
+		var a1, a2, t = 0,
+			b1, b2;
+		k = Math.PI / 180 * 1.5;
+
+		function trek() {
+			b1 = document.getElementById('body').clientWidth - 8;
+			b2 = document.getElementById('body').clientHeight - 8;
+
+			if ((document.getElementById('smile').style.left = rho * Math.cos(p) + a1 + 40 >= b1) ||
+				(document.getElementById('smile').style.top = rho * Math.sin(p) + a2 + 40 >= b2) ||
+				(document.getElementById('smile').style.left = rho * Math.cos(p) + a1 - 30 <= 0) ||
+				(document.getElementById('smile').style.top = rho * Math.sin(p) + a2 - 30 <= 0))
+
+			{
+				if (t == 0) {
+					k = -k;
+					t = 1;
+				}
+			} else {
+				t = 0;
+			}
+
+
+
+
+			document.getElementById('smile').style.left = rho * Math.cos(p) + (a1 - 30) + 'px';
+			document.getElementById('smile').style.top = rho * Math.sin(p) + (a2 - 30) + 'px';
+			p += k;
+
+		}
+
+		function kol() {
+
+
+
+			a1 = document.getElementById('smile').style.left = event.clientX;
+			a2 = document.getElementById('smile').style.top = event.clientY;
+
+
+
+			document.getElementById('smile').style.left = rho * Math.cos(p) + (a1 - 30) + 'px';
+			document.getElementById('smile').style.top = rho * Math.sin(p) + (a2 - 30) + 'px';
+
+
+
+		}
+
+		setInterval(trek, 10);
+	</script>
+</body>
+
+</html>

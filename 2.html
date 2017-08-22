@@ -1,0 +1,30 @@
+<html>
+<body bgcolor="#FFFF00" id="slideshow">
+
+<script type="text/javascript">
+
+var IMG=new Array('1.jpg','2.jpg','3.jpg','4.jpg'),cur=0;
+cur=Rand();
+
+
+function show(dir){
+cur=cur+dir;
+if (cur<0)cur=3;
+if (cur>3)cur=0;
+document.getElementById('slide').setAttribute('src', 'img/' + IMG[cur]); 
+}
+
+
+
+
+</script>
+
+<div style="text-align: center;">
+        <h3 >Pictures</h3>
+        <img id="slide" src="img/sld0.jpg" onClick="show(+1)">
+		
+
+</div>
+
+</body>
+</html>

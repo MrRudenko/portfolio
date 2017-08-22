@@ -1,0 +1,57 @@
+<html>
+    <head>
+      <title></title>
+    </head>
+    <body>
+        
+        <style type="text/css">
+            table{
+                text-align: center;
+                border: 3px solid blue;
+                background-color: yellow;
+            }
+            tr{
+                height: 25;
+                border: 2px solid green;
+            }
+            td{
+                width: 25;
+                border: 2px solid green;
+            }
+            #header{
+                font-weight: bold;
+            }
+        </style>
+    
+    
+        <script type="text/javascript">
+            document.write('<table>');
+            for(var i = 2; i <= 15; i++){
+                
+                document.write('<tr>');
+                for(var j = 2; j <= 15; j++){
+                    
+                    if(j == 2 && i!=2){
+                        document.write('<td id=header>' + (i) + '<\/td>');
+                    } else if(i == 2 && j!=2){
+                        document.write('<td id=header>' + (j) + '<\/td>');
+                    } else if (i==2 && j==2){
+                        document.write('<td id=header> <\/td>');
+                    } else if(i * j < 10){
+                        document.write('<td id=header>' + (j * i) + '<\/td>');
+                    }
+                    
+                    
+                    else{
+                        document.write('<td>' + (i * j) + '<\/td>');
+                    }
+                }
+                document.write('<\/tr>');
+            }
+            
+            document.write('<\/table>');
+
+        </script>
+        
+    </body>
+</html>

@@ -1,0 +1,63 @@
+
+<html >
+<title>Laba 7.3</title>
+<head>
+<script type="text/javascript">
+            function k()
+            {
+            document.getElementById('k').style.width=(document.getElementById('k').offsetWidth)-10 ;
+            document.getElementById('k').style.height=(document.getElementById('k').offsetHeight)-10 ;
+            }
+            function k1()
+            {
+            document.getElementById('k').style.width=(document.getElementById('k').offsetWidth)+10 ;
+            document.getElementById('k').style.height=(document.getElementById('k').offsetHeight)+10;
+            }
+             </script >
+  <title></title>
+</head>
+<body  scroll="false" id="body">
+        <img  id="k"  src="img/circle.png" style="position: absolute;" height="30" width="30"onmouseover="k()" onmouseout="k1()">
+        <img  id="p"  src="img/01.png" style="position: absolute" height="30" width="200">
+        <script type="text/javascript">
+        var n =10;
+                var p = Math.PI / 2;   // Встановлюємо кут 30°.
+                var r = 0;   // Початкове значення радіус вектора с.
+                var W=document.getElementById('body').clientWidth;
+                var H=document.getElementById('body').clientHeight;
+              var l=document.getElementById('k').offsetLeft;
+         var w=document.getElementById('k').offsetWidth;
+         var t=document.getElementById('k').offsetTop;
+         var h=document.getElementById('k').offsetHeight;
+       var pw=document.getElementById('p').offsetWidth;
+       var ph=document.getElementById('p').offsetHeight;
+       document.getElementById('p').style.left=0 + 'px';
+       document.getElementById('p').style.top=0 + 'px';
+       var pl=document.getElementById('p').offsetLeft;
+       var pt=document.getElementById('p').offsetTop;
+       var pt1=1;
+       l=0;
+       t=H-h;
+
+            function moveByLine() {
+                 var pt=document.getElementById('p').offsetTop;
+                 var ln,tn;
+                         ln=l+r*Math.cos(p);
+                         tn=t+r*Math.sin(p);
+                      if(tn<=(pt+ph) || (tn+h)>=H )
+                        {p=-p; r=1;  if(tn<=(pt+ph))
+                          {document.getElementById('p').style.top=pt1 + 'px'; pt1=pt1+1; t=pt1+ph-r*Math.sin(p);}}
+                           
+                             //выдбивання в верх
+                        l=l+r*Math.cos(p);
+                        t=t+r*Math.sin(p);
+                       document.getElementById('k').style.left=(l) + 'px';
+                        document.getElementById('k').style.top=(t) + 'px';
+                        r=r+0.005;
+                     //  if(x1>=l && x1<=l+h && y1>=t && y1<=t+h) document.getElementById('k').setAttribute(width,70%)
+                 //if((pt1+ph)>=(H-h)) clearInterval(moveInterval);
+                   document.getElementById('k').setAttribute((height="30"+n) (width="30"+n));}
+           var moveInterval = setInterval(moveByLine, 4);
+</script>
+</body>
+</html>

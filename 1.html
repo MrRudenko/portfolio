@@ -1,0 +1,52 @@
+<html>
+
+<head>
+	<title>
+	</title>
+	<meta charset="utf-8">
+	
+	<script src="script.js">	</script>
+	<link rel="stylesheet" href="main.css">
+</head>
+<p>Анкета опитування</p>
+<form action="mailto:rudymon96@gmail.com" name=rd>
+	<p id="p1"></p>
+	<input name=i1 type=text size=20 maxlength=10 value="" onchange="document.getElementById('p1').innerHTML = 'Вітаю, ' + this.value+'!'">Ім’я
+	<p id='p2'>Pass: qwerty123</p>
+
+	<input name=i2 type=password size=20 maxlength=10 value="" onchange="passs()">Пароль</br>
+	<p>Оберіть групу</p>
+	<select name="sel" onchange="document.getElementById(this.value).checked=true">
+		<option value=c1 selected >241</option>
+		<option value=c2 >242</option>
+		<option value=c3 >243</option>
+		</select>
+	<br>
+
+	<input id=c1 type="checkbox" value=ll ondblclick=rd.sel[2].selected="yes">241<br>
+	<input id=c2 type="checkbox" value=ll>242<br>
+	<input id=c3 type="checkbox" value=ll>243<br>
+
+	<input name=r1 type="radio" value=yes checked onclick="document.getElementById('yesno').setAttribute('src','img/yes.png')">Yes<br>
+	<input name=r1 type="radio" value=no onclick="document.getElementById('yesno').setAttribute('src','img/no.gif')">No<br>
+	<img id='yesno' src="">
+	<p>Оберіть місто</p><br>
+	<input name=zh type=hidden value="007"><br>
+	<select name=misto size=3>
+		<option value=k >Київ</option>
+		<option value=x >Харків</option>
+		<option value=p >Полтава</option>
+		</select>
+	<br>
+	<p>Декілька слів про себе</p><br>
+	<textarea id=t1 rows=4 cols=30></textarea>
+	<input type="submit" onmouseup="this.value=document.getElementById('t1').value">
+	<p>Додати документ</p>
+	<input name=f1 type=file><br><br>
+	<input type=reset value="Відкат">
+	<input type="submit" value="Відправити">
+
+
+</form>
+
+</html>

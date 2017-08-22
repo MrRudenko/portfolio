@@ -1,0 +1,416 @@
+<html>
+<head>
+<title>Yo!</title>
+<script type="text/javascript">
+	var phi = Math.PI/4;
+	var rhoOffset = 4;
+
+	var movc = true;
+	var movt = true;
+	var movs = true;
+</script>
+</head>
+<body style="background-image: url(back.png); color:yellow" id="bodyd"
+	onresize="bw = document.getElementById('bodyd').clientWidth; bh = document.getElementById('bodyd').clientHeight;"
+	onmousemove="movv()"
+>
+<h1 style="z-index:5;">Play with rect</h1><br><br><input style="z-index:6;" type="button" value="Stop" onclick="movc=false; movt=false; movs=false;"><input style=" z-index:7; left:75px;" type="button" value="Back" onclick="returnCircle(); returnTriangle(); returnSquare();">
+
+<div name="triangle" id="triangle" style="z-index:1; left:0px; position:absolute; width:146; height:75; background: #006464 url(triangle.png) no-repeat bottom right"
+	onclick="if(movt) movt=false; else movt=true;"
+	ondblclick="returnTriangle()"
+	oncontextmenu="rclk(2); return false;"
+	onmouseover="clearInterval(triangleProc); triangleProc = setInterval(moveByLineT,10); rclkb(2);"
+	onmouseout="clearInterval(triangleProc); triangleProc = setInterval(moveByLineT,20); document.getElementById('pidkazkab').style.visibility = 'hidden';"
+>&nbsp;</div>
+<body style="background-image: url(back.png);">
+<div id="square" style="z-index:2; left:200px; position:absolute; width:146; height:75; background: black url(sq.png) no-repeat bottom right"
+	onclick="if(movs) movs=false; else movs=true;"
+	ondblclick="returnSquare()"
+	oncontextmenu="rclk(3); return false;"
+	onmouseover="clearInterval(squareProc); squareProc = setInterval(moveByLineS,10); rclkb(3);"
+	onmouseout="clearInterval(squareProc); squareProc = setInterval(moveByLineS,20); document.getElementById('pidkazkab').style.visibility = 'hidden';"
+>&nbsp;</div>
+<div id="circle" style="z-index:3; left:300px; position:absolute; width:55; height:60; background: url(circle.png) no-repeat "
+	onclick="if(movc) movc=false; else movc=true;"
+	ondblclick="returnCircle()"
+	oncontextmenu="rclk(1); return false;"
+	onmouseover="clearInterval(circleProc); circleProc = setInterval(moveByLineC,10); rclkb(1);"
+	onmouseout="clearInterval(circleProc); circleProc = setInterval(moveByLineC,20); document.getElementById('pidkazkab').style.visibility = 'hidden';"
+>&nbsp;</div>
+
+<span id="pidkazka" style="visibility: hidden; position: absolute; z-index:7; width:170px;">!</span>
+<span id="pidkazkab" style="visibility: hidden; position: absolute; z-index:8; width:95px;">!</span>
+
+<script type="text/javascript"> 
+	var bw = document.getElementById('bodyd').clientWidth;
+	var bh = document.getElementById('bodyd').clientHeight;
+
+	var xc = bw - 100;
+	var yc = bh - 150;
+	var dirc = 1;
+
+	var rhoxc = xc/Math.cos(phi);
+	var rhoyc = yc/Math.sin(phi);
+
+	document.getElementById('circle').style.left = xc;
+    document.getElementById('circle').style.top = yc;
+	document.getElementById('circle').style.width = document.getElementById('circle').offsetWidth;
+
+	function moveByLineC() {
+		if(!movc) return;
+        switch(dirc) {
+			case 7:
+				rhoxc += rhoOffset;
+				rhoyc += rhoOffset;
+
+				if(document.getElementById('circle').offsetHeight +
+				   document.getElementById('circle').offsetTop + 7 >
+				   document.getElementById('bodyd').clientHeight) {
+
+					dirc = 1;
+				}
+				if(document.getElementById('circle').offsetWidth +
+				   document.getElementById('circle').offsetLeft + 7 >
+				   document.getElementById('bodyd').clientWidth) {
+
+					dirc = 9;
+				}
+			break;
+			case 1:
+				rhoxc += rhoOffset;
+				rhoyc -= rhoOffset;
+
+				if(document.getElementById('circle').offsetTop < 3) {
+					dirc = 7;
+				}
+				if(document.getElementById('circle').offsetWidth +
+				   document.getElementById('circle').offsetLeft + 7 >
+				   document.getElementById('bodyd').clientWidth) {
+
+					dirc = 3;
+				}
+			break;
+			case 3:
+				rhoxc -= rhoOffset;
+				rhoyc -= rhoOffset;
+
+				if(document.getElementById('circle').offsetTop < 3) {
+					dirc = 9;
+				}
+				if(document.getElementById('circle').offsetLeft < 3) {
+					dirc = 1;
+				}
+			break;
+			case 9:
+				rhoxc -= rhoOffset;
+				rhoyc += rhoOffset;
+
+				if(document.getElementById('circle').offsetHeight +
+				   document.getElementById('circle').offsetTop + 7 >
+				   document.getElementById('bodyd').clientHeight) {
+					dirc = 3;
+				}
+				if(document.getElementById('circle').offsetLeft < 3) {
+					dirc = 7;
+				}
+			break;
+		}
+
+
+
+		document.getElementById('circle').style.left = rhoxc * Math.cos(phi) + 'px';
+        document.getElementById('circle').style.top = rhoyc * Math.sin(phi) + 'px';
+	}
+
+	circleProc = setInterval(moveByLineC, 20);
+</script>
+
+<script type="text/javascript">
+	var xt = bw - 150;
+	var yt = bh - 85;
+	var dirt = 3;
+
+	var rhoxt = xt/Math.cos(phi);
+	var rhoyt = yt/Math.sin(phi);
+
+	document.getElementById('triangle').style.left = xt;
+    document.getElementById('triangle').style.top = yt;
+	document.getElementById('triangle').style.width = document.getElementById('triangle').offsetWidth;
+
+	function moveByLineT() {
+		if(!movt) return;
+        switch(dirt) {
+			case 7:
+				rhoxt += rhoOffset;
+				rhoyt += rhoOffset;
+
+				if(document.getElementById('triangle').offsetHeight +
+				   document.getElementById('triangle').offsetTop + 7 >
+				   document.getElementById('bodyd').clientHeight) {
+
+					dirt = 1;
+				}
+				if(document.getElementById('triangle').offsetWidth +
+				   document.getElementById('triangle').offsetLeft + 7 >
+				   document.getElementById('bodyd').clientWidth) {
+
+					dirt = 9;
+				}
+			break;
+			case 1:
+				rhoxt += rhoOffset;
+				rhoyt -= rhoOffset;
+
+				if(document.getElementById('triangle').offsetTop < 3) {
+					dirt = 7;
+				}
+				if(document.getElementById('triangle').offsetWidth +
+				   document.getElementById('triangle').offsetLeft + 7 >
+				   document.getElementById('bodyd').clientWidth) {
+
+					dirt = 3;
+				}
+			break;
+			case 3:
+				rhoxt -= rhoOffset;
+				rhoyt -= rhoOffset;
+
+				if(document.getElementById('triangle').offsetTop < 3) {
+					dirt = 9;
+				}
+				if(document.getElementById('triangle').offsetLeft < 3) {
+					dirt = 1;
+				}
+			break;
+			case 9:
+				rhoxt -= rhoOffset;
+				rhoyt += rhoOffset;
+
+				if(document.getElementById('triangle').offsetHeight +
+				   document.getElementById('triangle').offsetTop + 7 >
+				   document.getElementById('bodyd').clientHeight) {
+					dirt = 3;
+				}
+				if(document.getElementById('triangle').offsetLeft < 3) {
+					dirt = 7;
+				}
+			break;
+		}
+
+
+
+		document.getElementById('triangle').style.left = rhoxt * Math.cos(phi) + 'px';
+        document.getElementById('triangle').style.top = rhoyt * Math.sin(phi) + 'px';
+	}
+
+	triangleProc = setInterval(moveByLineT, 20);
+</script>
+
+<script type="text/javascript"> <!--Прямокутник-->
+	var xs = bw/2;
+	var ys = bh/2;
+	var dirs = 9;
+
+	var rhoxs = xs/Math.cos(phi);
+	var rhoys = ys/Math.sin(phi);
+
+	document.getElementById('square').style.left = xs;
+    document.getElementById('square').style.top = ys;
+	document.getElementById('square').style.width = document.getElementById('square').offsetWidth;
+
+	function moveByLineS() {
+		if(!movs) return;
+        switch(dirs) {
+			case 7:
+				rhoxs += rhoOffset;
+				rhoys += rhoOffset;
+
+				if(document.getElementById('square').offsetHeight +
+				   document.getElementById('square').offsetTop + 7 >
+				   document.getElementById('bodyd').clientHeight) {
+
+					dirs = 1;
+				}
+				if(document.getElementById('square').offsetWidth +
+				   document.getElementById('square').offsetLeft + 7 >
+				   document.getElementById('bodyd').clientWidth) {
+
+					dirs = 9;
+				}
+			break;
+			case 1:
+				rhoxs += rhoOffset;
+				rhoys -= rhoOffset;
+
+				if(document.getElementById('square').offsetTop < 3) {
+					dirs = 7;
+				}
+				if(document.getElementById('square').offsetWidth +
+				   document.getElementById('square').offsetLeft + 7 >
+				   document.getElementById('bodyd').clientWidth) {
+
+					dirs = 3;
+				}
+			break;
+			case 3:
+				rhoxs -= rhoOffset;
+				rhoys -= rhoOffset;
+
+				if(document.getElementById('square').offsetTop < 3) {
+					dirs = 9;
+				}
+				if(document.getElementById('square').offsetLeft < 3) {
+					dirs = 1;
+				}
+			break;
+			case 9:
+				rhoxs -= rhoOffset;
+				rhoys += rhoOffset;
+
+				if(document.getElementById('square').offsetHeight +
+				   document.getElementById('square').offsetTop + 7 >
+				   document.getElementById('bodyd').clientHeight) {
+					dirs = 3;
+				}
+				if(document.getElementById('square').offsetLeft < 3) {
+					dirs = 7;
+				}
+			break;
+		}
+
+
+
+		document.getElementById('square').style.left = rhoxs * Math.cos(phi) + 'px';
+        document.getElementById('square').style.top = rhoys * Math.sin(phi) + 'px';
+	}
+
+	squareProc = setInterval(moveByLineS, 20);
+</script>
+
+<script type="text/javascript">
+	function returnCircle() {
+		movc=false;
+
+		document.getElementById('circle').style.left = bw - 100;
+		document.getElementById('circle').style.top = bh - 150;
+
+		rhoxc = (bw - 100)/Math.cos(phi);
+		rhoyc = (bh - 150)/Math.sin(phi)
+	}
+
+	function returnTriangle() {
+		movt=false;
+
+		document.getElementById('triangle').style.left = bw - 150;
+		document.getElementById('triangle').style.top = bh - 85;
+
+		rhoxt = (bw - 150)/Math.cos(phi);
+		rhoyt = (bh - 85)/Math.sin(phi);
+	}
+
+	function returnSquare() {
+		movs=false;
+
+		document.getElementById('square').style.left = bw/2;
+		document.getElementById('square').style.top = bh/2;
+
+		rhoxs = (bw/2)/Math.cos(phi);
+		rhoys = (bh/2)/Math.sin(phi);
+	}
+
+
+	tw = document.getElementById('pidkazka').offsetWidth;
+	th = document.getElementById('pidkazka').offsetHeight;
+	document.getElementById('pidkazka').style.width = document.getElementById('pidkazka').offsetWidth;
+
+
+
+	function rclk(tip) {
+		var xrclk,yrclk;
+
+		if(event.clientX + tw >= bw) xrclk = bw - tw - 1;
+		else xrclk=event.clientX;
+
+		if(event.clientY + th >= bh) yrclk = bh - th - 1;
+		else yrclk=event.clientY;
+
+		if(tip==1) {
+			document.getElementById('pidkazka').style.visibility = 'visible';
+			document.getElementById('pidkazka').style.left = xrclk;
+			document.getElementById('pidkazka').style.top = yrclk;
+			document.getElementById('pidkazka').innerHTML='Кулька (зелена)';
+		}
+		if(tip==2) {
+			document.getElementById('pidkazka').style.visibility = 'visible';
+			document.getElementById('pidkazka').style.left = xrclk;
+			document.getElementById('pidkazka').style.top = yrclk;
+			document.getElementById('pidkazka').innerHTML='Трикутник (синій)';
+		}
+		if(tip==3) {
+			document.getElementById('pidkazka').style.visibility = 'visible';
+			document.getElementById('pidkazka').style.left = xrclk;
+			document.getElementById('pidkazka').style.top = yrclk;
+			document.getElementById('pidkazka').innerHTML='Прямокутник (коричневий)';
+		}
+
+		setTimeout(hideTip,3000);
+	}
+
+	function hideTip() {
+		document.getElementById('pidkazka').style.visibility = 'hidden';
+	}
+
+	function statusn() {
+		status="Кулька("+(Math.round(rhoxc*Math.cos(phi)))+","+(Math.round(rhoyc*Math.sin(phi))) +") " + "Прямокутник("+(Math.round(rhoxs*Math.cos(phi)))+","+(Math.round(rhoys*Math.sin(phi))) +") " + "Трикутник("+(Math.round(rhoxt*Math.cos(phi)))+","+(Math.round(rhoyt*Math.sin(phi))) +") " + "Курсор("+xgl+","+ygl +")";
+	}
+	setInterval(statusn,100);
+
+
+	var xgl,ygl;
+
+	function movv() {
+		xgl = event.clientX;
+        ygl = event.clientY;
+
+		if(event.clientX + 95 >= bw) document.getElementById('pidkazkab').style.left = bw - tw - 1;
+		else document.getElementById('pidkazkab').style.left = xgl;
+
+		if(event.clientY + th >= bh) document.getElementById('pidkazkab').style.top = bh - th - 1;
+		else document.getElementById('pidkazkab').style.top = ygl;
+
+
+
+	}
+
+	function rclkb(tip) {
+		if(tip==1 && event.ctrlKey==true) {
+			document.getElementById('pidkazkab').style.visibility = 'visible';
+			document.getElementById('pidkazkab').innerHTML='Кулька';
+		}
+		if(tip==2 && event.ctrlKey==true) {
+			document.getElementById('pidkazkab').style.visibility = 'visible';
+			document.getElementById('pidkazkab').innerHTML='Трикутник';
+		}
+		if(tip==3 && event.ctrlKey==true) {
+			document.getElementById('pidkazkab').style.visibility = 'visible';
+			document.getElementById('pidkazkab').innerHTML='Прямокутник';
+		}
+
+		if(tip==1 && event.altKey==true) {
+			document.getElementById('pidkazkab').style.visibility = 'visible';
+			document.getElementById('pidkazkab').innerHTML='Зелена';
+		}
+		if(tip==2 && event.altKey==true) {
+			document.getElementById('pidkazkab').style.visibility = 'visible';
+			document.getElementById('pidkazkab').innerHTML='Синій';
+		}
+		if(tip==3 && event.altKey==true) {
+			document.getElementById('pidkazkab').style.visibility = 'visible';
+			document.getElementById('pidkazkab').innerHTML='Коричневий';
+		}
+	}
+</script>
+
+</body>
+</html>
